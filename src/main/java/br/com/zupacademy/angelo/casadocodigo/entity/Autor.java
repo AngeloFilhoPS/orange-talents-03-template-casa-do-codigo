@@ -10,14 +10,12 @@ public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    @NotNull
+    @NotBlank
     private String nome;
-    @Column(unique = true,nullable = false)
     @Email(message = "Insira um email válido")
-    @NotNull
+    @NotBlank
     private String email;
-    @NotNull
+    @NotBlank
     @Size(max = 400, message = "Sua descrição não pode ter mais de 400 caracteres")
     private String descricao;
     private LocalDateTime criadoEm = LocalDateTime.now();
@@ -26,11 +24,12 @@ public class Autor {
     public Autor(){
     }
 
-    public Autor(String nome, String email, String descricao, LocalDateTime criadoEm){
+    public Autor(@NotBlank String nome,
+                 @NotBlank @Email  String email,
+                 @NotBlank @Size(max = 400, message = "Sua descrição não pode ter mais de 400 caracteres") String descricao){
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;
-        this.criadoEm = criadoEm;
     }
 
     public Long getId(){

@@ -39,5 +39,5 @@ public class AutorForm {
         this.criadoEm = criadoEm;
     }
 
-    public Autor converter(){ return new Autor(nome,email,descricao,criadoEm);}
+    public Autor converter(){ return new Autor(nome,email,descricao);}
 }
