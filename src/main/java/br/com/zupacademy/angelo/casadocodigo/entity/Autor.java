@@ -20,7 +20,7 @@ public class Autor {
     private String descricao;
     private LocalDateTime criadoEm = LocalDateTime.now();
 
-    //@deprecated Hibernate only
+    @Deprecated
     public Autor(){
     }
 

@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface AutorRepository extends CrudRepository<Autor,Long> {
-    Optional<Autor> findById(Long id);
+    Optional<Autor> findByEmail(String email);
 
 }

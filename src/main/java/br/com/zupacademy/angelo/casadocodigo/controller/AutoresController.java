@@ -7,33 +7,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/autor")
-public class AutorController {
+@RequestMapping("/autores")
+public class AutoresController {
 
     @Autowired
     private AutorRepository autorRepository;
 
-    public AutorController(AutorRepository autorRepository){
+    @Autowired
+    private ProibeEmailDuplicadoAutorValidator proibeEmailDuplicadoAutorValidator;
+
+    @InitBinder
+    public void init(WebDataBinder binder){
+        binder.addValidators(proibeEmailDuplicadoAutorValidator);
+    }
+
+    public AutoresController(AutorRepository autorRepository){
         this.autorRepository = autorRepository;
     }
 
+//    @PostMapping
+//    public ResponseEntity<?> cadastrarAutor(@RequestBody @Valid AutorForm form){
+//
+//        Autor autor = form.converter();
+//        autor = autorRepository.save(autor);
+//        return ResponseEntity.ok().body(autor);
+//    }
     @PostMapping
-    public ResponseEntity<?> cadastrarAutor(@RequestBody @Valid AutorForm form, BindingResult result){
-        if (result.hasErrors()){
-            return ResponseEntity.badRequest().body(result);
-        };
+    public String cadastrarAutor(@RequestBody @Valid AutorForm form){
+
         Autor autor = form.converter();
         autor = autorRepository.save(autor);
-        return ResponseEntity.ok().body(autor);
+        return "ok";
     }
+
 
 }

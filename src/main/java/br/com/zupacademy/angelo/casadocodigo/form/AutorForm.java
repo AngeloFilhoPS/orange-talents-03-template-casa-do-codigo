@@ -23,20 +23,8 @@ public class AutorForm {
         this.criadoEm = LocalDateTime.now();
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public void setCriadoEm(LocalDateTime criadoEm) {
-        this.criadoEm = criadoEm;
+    public String getEmail() {
+        return this.email;
     }
 
     public Autor converter(){ return new Autor(nome,email,descricao);}
