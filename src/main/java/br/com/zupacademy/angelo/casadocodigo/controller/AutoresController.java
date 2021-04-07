@@ -32,20 +32,23 @@ public class AutoresController {
         this.autorRepository = autorRepository;
     }
 
-//    @PostMapping
-//    public ResponseEntity<?> cadastrarAutor(@RequestBody @Valid AutorForm form){
-//
-//        Autor autor = form.converter();
-//        autor = autorRepository.save(autor);
-//        return ResponseEntity.ok().body(autor);
-//    }
     @PostMapping
+    public ResponseEntity<?> cadastrarAutor(@RequestBody @Valid AutorForm form){
+
+
+
+        Autor autor = form.converter();
+        autor = autorRepository.save(autor);
+        return ResponseEntity.ok().body(autor);
+    }
+    //Boolean existByEmail = autorRepository.existsByEmail(form.getEmail)
+   /* @PostMapping
     public String cadastrarAutor(@RequestBody @Valid AutorForm form){
 
         Autor autor = form.converter();
         autor = autorRepository.save(autor);
         return "ok";
-    }
+    }*/
 
 
 }

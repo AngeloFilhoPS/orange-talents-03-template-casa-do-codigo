@@ -9,8 +9,28 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import java.util.Optional;
+import java.util.function.Function;
+
 @Component
-public class  ProibeEmailDuplicadoAutorValidator implements Validator {
+public class  ProibeEmailDuplicadoAutorValidator<T,P> implements Validator {
+
+
+    private String campo;
+    private String codigoErro;
+    private Class<? extends  T> classeParaValidar;
+    private Function<P, Boolean> metodoQueConsultaBd;
+
+
+    /*public ProibeEmailDuplicadoAutorValidator(String campo,
+                                              String codigoErro,
+                                              Class<? extends T> classeParaValidar,
+                                              Function<P, Boolean> metodoQueConsultaBd,
+                                              ) {
+        this.campo = campo;
+        this.codigoErro = codigoErro;
+        this.classeParaValidar = classeParaValidar;
+        this.metodoQueConsultaBd = metodoQueConsultaBd;
+    }*/
 
     @Autowired
     private AutorRepository autorRepository;
