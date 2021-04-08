@@ -12,10 +12,13 @@ import java.time.LocalDateTime;
 public class AutorForm {
     @NotBlank
     private String nome;
+
     @NotBlank
     @UniqueValue(domainClass = Autor.class, fieldName = "email")
     private String email;
+
     @Size(max = 400, message = "Sua descrição não pode ter mais de 400 caracteres")
+    @NotBlank
     private String descricao;
     private LocalDateTime criadoEm = LocalDateTime.now();
 
