@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueValue {
-    String message() default "{Valor deve ser único}";
+    String message() default "{Já existe um valor igual, ele deve ser único tente outro}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
     String fieldName();

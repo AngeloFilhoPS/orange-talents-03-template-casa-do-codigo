@@ -2,10 +2,7 @@ package br.com.zupacademy.angelo.casadocodigo.entity;
 
 import br.com.zupacademy.angelo.casadocodigo.compartilhado.UniqueValue;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -15,7 +12,7 @@ public class Categoria {
     private Long id;
 
     @NotBlank
-    @UniqueValue(domainClass = Categoria.class,fieldName = "nome")
+    @Column(unique = true)
     private String nome;
 
     @Deprecated

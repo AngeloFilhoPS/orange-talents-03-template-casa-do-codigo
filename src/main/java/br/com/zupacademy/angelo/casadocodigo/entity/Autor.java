@@ -15,8 +15,7 @@ public class Autor {
     @NotBlank
     private String nome;
     @Email(message = "Insira um email válido")
-    @NotBlank
-    @UniqueValue(domainClass = Autor.class, fieldName = "email")
+    @Column(unique = true)
     private String email;
     @NotBlank
     @Size(max = 400, message = "Sua descrição não pode ter mais de 400 caracteres")
