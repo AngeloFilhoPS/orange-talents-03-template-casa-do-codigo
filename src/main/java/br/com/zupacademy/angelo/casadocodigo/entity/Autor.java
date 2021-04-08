@@ -1,5 +1,7 @@
 package br.com.zupacademy.angelo.casadocodigo.entity;
 
+import br.com.zupacademy.angelo.casadocodigo.compartilhado.UniqueValue;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
@@ -14,6 +16,7 @@ public class Autor {
     private String nome;
     @Email(message = "Insira um email válido")
     @NotBlank
+    @UniqueValue(domainClass = Autor.class, fieldName = "email")
     private String email;
     @NotBlank
     @Size(max = 400, message = "Sua descrição não pode ter mais de 400 caracteres")

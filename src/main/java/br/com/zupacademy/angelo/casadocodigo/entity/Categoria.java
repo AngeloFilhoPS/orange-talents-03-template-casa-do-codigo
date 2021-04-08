@@ -1,5 +1,7 @@
 package br.com.zupacademy.angelo.casadocodigo.entity;
 
+import br.com.zupacademy.angelo.casadocodigo.compartilhado.UniqueValue;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +13,9 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank
+    @UniqueValue(domainClass = Categoria.class,fieldName = "nome")
     private String nome;
 
     @Deprecated
