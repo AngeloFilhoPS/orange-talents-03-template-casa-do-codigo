@@ -2,6 +2,7 @@ package br.com.zupacademy.angelo.casadocodigo.controller;
 
 import br.com.zupacademy.angelo.casadocodigo.entity.Autor;
 import br.com.zupacademy.angelo.casadocodigo.form.AutorForm;
+import br.com.zupacademy.angelo.casadocodigo.form.AutorResponseForm;
 import br.com.zupacademy.angelo.casadocodigo.repository.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.BindResult;
@@ -29,7 +30,7 @@ public class AutoresController {
 
         Autor autor = form.converter();
         autor = autorRepository.save(autor);
-        return ResponseEntity.ok().body(autor);
+        return ResponseEntity.ok().body(new AutorResponseForm(autor));
     }
 
 

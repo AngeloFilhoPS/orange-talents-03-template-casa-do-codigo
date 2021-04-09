@@ -18,7 +18,7 @@ public class Categoria {
     @Deprecated
     public Categoria(){}
 
-    public Categoria( @NotBlank String nome) {
+    public Categoria(String nome) {
         this.nome = nome;
     }
 
