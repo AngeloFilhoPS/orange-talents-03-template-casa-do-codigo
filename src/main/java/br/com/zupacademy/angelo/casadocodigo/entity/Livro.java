@@ -45,6 +45,7 @@ public class Livro {
     private String isbn;
 
     @NotNull
+    @Future
     @JsonFormat(pattern = "yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
     private LocalDate dataLancamento;
 
@@ -54,7 +55,10 @@ public class Livro {
 
     @ManyToOne
     private Autor autor;
+//Hibernate only
+    public Livro(){
 
+    }
 
     public Livro(
                  @NotNull @NotBlank String titulo,

@@ -120,7 +120,7 @@ public class LivroForm {
     }
 
 
-    public ResponseEntity<?> converte(CategoriaRepository categoriaRepository, AutorRepository autorRepository, LivroRepository livroRepository) throws Exception {
+    public ResponseEntity<?> converteRetornaResponse(CategoriaRepository categoriaRepository, AutorRepository autorRepository, LivroRepository livroRepository) throws Exception {
 
         Optional<Categoria> categoriaEncontrada = categoriaRepository.findByNome(categoria);
         Optional<Autor> autorEncontrado = autorRepository.findByNome(autor);

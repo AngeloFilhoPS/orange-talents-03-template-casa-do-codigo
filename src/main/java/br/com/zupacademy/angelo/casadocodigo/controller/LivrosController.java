@@ -1,6 +1,5 @@
 package br.com.zupacademy.angelo.casadocodigo.controller;
 
-import br.com.zupacademy.angelo.casadocodigo.entity.Livro;
 import br.com.zupacademy.angelo.casadocodigo.form.LivroForm;
 import br.com.zupacademy.angelo.casadocodigo.repository.AutorRepository;
 import br.com.zupacademy.angelo.casadocodigo.repository.CategoriaRepository;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-
+//5
 @RestController
 @RequestMapping("/livros")
 public class LivrosController {
@@ -33,7 +32,7 @@ public class LivrosController {
     @PostMapping
     public ResponseEntity<?> cadastrarLivro(@RequestBody @Valid LivroForm form) throws Exception {
 
-        ResponseEntity<?> livro = form.converte(categoriaRepository,autorRepository,livroRepository);
+        ResponseEntity<?> livro = form.converteRetornaResponse(categoriaRepository,autorRepository,livroRepository);
 
         return livro;
     }
