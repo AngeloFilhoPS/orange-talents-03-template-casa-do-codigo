@@ -15,4 +15,6 @@ public interface LivroRepository extends CrudRepository<Livro,Long> {
     Optional<Livro> existsLivroByIsbn(String isbn);
 
     Object findAll(Pageable paginacao);
+
+    Livro findLivroById(Long id);
 }

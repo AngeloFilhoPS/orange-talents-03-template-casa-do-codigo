@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
+
 //5
 @RestController
 @RequestMapping("/livros")
@@ -45,6 +47,16 @@ public class LivrosController {
                                           Pageable paginacao){
         Page<LivroResponse> livros  = (Page<LivroResponse>) livroRepository.findAll(paginacao);
         return livros;
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Livro> detalha(@PathVariable Long id){
+        Optional<Livro> livro = livroRepository.findById(id);
+        if(livro.isPresent()){
+            System.out.println("oi");
+            Livro livroR = livroRepository.findLivroById(id);
+            return ResponseEntity.ok().body(livroR);
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }
