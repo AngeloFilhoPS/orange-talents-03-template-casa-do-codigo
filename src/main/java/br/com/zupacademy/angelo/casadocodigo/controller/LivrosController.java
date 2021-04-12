@@ -49,12 +49,11 @@ public class LivrosController {
         return livros;
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Livro> detalha(@PathVariable Long id){
+    public ResponseEntity<LivroResponse> detalha(@PathVariable Long id){
         Optional<Livro> livro = livroRepository.findById(id);
         if(livro.isPresent()){
-            System.out.println("oi");
             Livro livroR = livroRepository.findLivroById(id);
-            return ResponseEntity.ok().body(livroR);
+            return ResponseEntity.ok().body(new LivroResponse(livroR));
         }
         return ResponseEntity.notFound().build();
     }
