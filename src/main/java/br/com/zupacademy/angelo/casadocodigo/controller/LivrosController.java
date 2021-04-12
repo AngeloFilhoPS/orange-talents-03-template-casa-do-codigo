@@ -1,15 +1,18 @@
 package br.com.zupacademy.angelo.casadocodigo.controller;
 
+import br.com.zupacademy.angelo.casadocodigo.entity.Livro;
 import br.com.zupacademy.angelo.casadocodigo.form.LivroForm;
+import br.com.zupacademy.angelo.casadocodigo.form.LivroResponse;
 import br.com.zupacademy.angelo.casadocodigo.repository.AutorRepository;
 import br.com.zupacademy.angelo.casadocodigo.repository.CategoriaRepository;
 import br.com.zupacademy.angelo.casadocodigo.repository.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 //5
@@ -36,4 +39,12 @@ public class LivrosController {
 
         return livro;
     }
+    @GetMapping
+    public Page<LivroResponse> listaLivro(@RequestParam(required = false)String nomeLivro,
+                                          @PageableDefault(sort = "id", direction = Sort.Direction.ASC, page = 0,size = 10)
+                                          Pageable paginacao){
+        Page<LivroResponse> livros  = (Page<LivroResponse>) livroRepository.findAll(paginacao);
+        return livros;
+    }
+
 }
