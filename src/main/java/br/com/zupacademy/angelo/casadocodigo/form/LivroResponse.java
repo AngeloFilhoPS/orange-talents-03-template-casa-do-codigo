@@ -4,6 +4,8 @@ import br.com.zupacademy.angelo.casadocodigo.entity.Autor;
 import br.com.zupacademy.angelo.casadocodigo.entity.Categoria;
 import br.com.zupacademy.angelo.casadocodigo.entity.Livro;
 
+import java.time.LocalDate;
+
 public class LivroResponse {
     private String titulo;
     private String resumo;
@@ -11,8 +13,8 @@ public class LivroResponse {
     private double preco;
     private Integer numeroPaginas;
     private String isbn;
-    private String autor;
-    private Autor autorObj;
+    private AutorResponseForm autor;
+    private LocalDate dataLancamento;
 
 
     public LivroResponse(Livro livro){
@@ -22,8 +24,8 @@ public class LivroResponse {
         this.preco= livro.getPreco();
         this.numeroPaginas= livro.getNumeroPaginas();
         this.isbn=livro.getIsbn();
-        this.autorObj= livro.getAutor();
-        this.autor= autorObj.getNome();
+        this.autor= new AutorResponseForm(livro.getAutor());
+        this.dataLancamento = livro.getDataLancamento();
     }
 
     public String getTitulo() {
@@ -50,7 +52,13 @@ public class LivroResponse {
         return isbn;
     }
 
-    public String getAutor() {
+
+
+    public LocalDate getDataLancamento() {
+        return dataLancamento;
+    }
+
+    public AutorResponseForm getAutor() {
         return autor;
     }
 }
