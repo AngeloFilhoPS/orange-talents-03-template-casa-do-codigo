@@ -1,6 +1,7 @@
 package br.com.zupacademy.angelo.casadocodigo.form;
 
 import br.com.zupacademy.angelo.casadocodigo.compartilhado.ExistValue;
+import br.com.zupacademy.angelo.casadocodigo.compartilhado.ExistsId;
 import br.com.zupacademy.angelo.casadocodigo.compartilhado.UniqueValue;
 import br.com.zupacademy.angelo.casadocodigo.entity.Estado;
 import br.com.zupacademy.angelo.casadocodigo.entity.Pais;
@@ -19,6 +20,7 @@ public class EstadoForm {
     private String nome;
 
     @NotNull
+    @ExistsId(domainClass = Pais.class, fieldName = "id")
     private Long idPais;
 
     public EstadoForm(){
