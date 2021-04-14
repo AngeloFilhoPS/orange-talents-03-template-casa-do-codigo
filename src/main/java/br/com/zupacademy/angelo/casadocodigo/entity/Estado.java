@@ -1,29 +1,28 @@
 package br.com.zupacademy.angelo.casadocodigo.entity;
 
-import br.com.zupacademy.angelo.casadocodigo.compartilhado.UniqueValue;
-
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.List;
-
+import javax.validation.constraints.NotNull;
 @Entity
-public class Categoria {
+public class Estado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    @Column(unique = true)
     private String nome;
 
+    @NotNull
+    @ManyToOne
+    @Valid
+    private Pais pais;
 
+    public Estado(){}
 
-    @Deprecated
-    public Categoria(){}
-
-    public Categoria(String nome) {
+    public Estado(String nome, Pais pais) {
         this.nome = nome;
+        this.pais = pais;
     }
 
     public Long getId() {
@@ -32,5 +31,9 @@ public class Categoria {
 
     public String getNome() {
         return nome;
+    }
+
+    public Pais getPais() {
+        return pais;
     }
 }
