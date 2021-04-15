@@ -23,13 +23,15 @@ public class Cliente {
     @NotNull
     private String sobrenome;
 
-    @CPF
     @NotNull
     @Column(unique = true)
-    private String cpf;
+    private String cpfOrCnpj;
 
     @NotNull
     private String endereco;
+
+    @NotNull
+    private String complemento;
 
     @NotNull
     private String pais;
@@ -45,12 +47,13 @@ public class Cliente {
 
     public Cliente(){}
 
-    public Cliente(String email, String nome, String sobrenome, String cpf, String endereco, String pais, String estado, String telefone, String cep) {
+    public Cliente(String email, String nome, String sobrenome, String cpfOrCnpj, String endereco,String complemento, String pais, String estado, String telefone, String cep) {
         this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.cpf = cpf;
+        this.cpfOrCnpj = cpfOrCnpj;
         this.endereco = endereco;
+        this.complemento= complemento;
         this.pais = pais;
         this.estado = estado;
         this.telefone = telefone;
@@ -73,10 +76,6 @@ public class Cliente {
         return sobrenome;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
     public String getEndereco() {
         return endereco;
     }
@@ -95,5 +94,13 @@ public class Cliente {
 
     public String getCep() {
         return cep;
+    }
+
+    public String getCpfOrCnpj() {
+        return cpfOrCnpj;
+    }
+
+    public String getComplemento() {
+        return complemento;
     }
 }

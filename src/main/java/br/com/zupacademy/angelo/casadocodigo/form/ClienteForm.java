@@ -1,6 +1,11 @@
 package br.com.zupacademy.angelo.casadocodigo.form;
 
+import br.com.zupacademy.angelo.casadocodigo.compartilhado.CpfOrCnpj;
+import br.com.zupacademy.angelo.casadocodigo.compartilhado.ExistValue;
+import br.com.zupacademy.angelo.casadocodigo.compartilhado.UniqueValue;
 import br.com.zupacademy.angelo.casadocodigo.entity.Cliente;
+import br.com.zupacademy.angelo.casadocodigo.entity.Estado;
+import br.com.zupacademy.angelo.casadocodigo.entity.Pais;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.Column;
@@ -12,6 +17,7 @@ public class ClienteForm {
 
     @Email
     @NotBlank
+    @UniqueValue(domainClass = Cliente.class,fieldName = "email")
     private String email;
 
     @NotBlank
@@ -20,17 +26,23 @@ public class ClienteForm {
     @NotBlank
     private String sobrenome;
 
-    @CPF
+    @CpfOrCnpj
     @NotBlank
+    @UniqueValue(domainClass = Cliente.class,fieldName = "cpf")
     private String cpf;
 
     @NotBlank
     private String endereco;
 
     @NotBlank
+    private String complemento;
+
+    @NotBlank
+    @ExistValue(entity = Pais.class,campo = "nome")
     private String pais;
 
     @NotBlank
+    @ExistValue(entity = Estado.class,campo = "nome")
     private String estado;
 
     @NotBlank
@@ -39,12 +51,13 @@ public class ClienteForm {
     @NotBlank
     private String cep;
 
-    public ClienteForm(String email, String nome, String sobrenome, String cpf, String endereco, String pais, String estado, String telefone, String cep) {
+    public ClienteForm(String email, String nome, String sobrenome, String cpf, String endereco, String complemento, String pais, String estado, String telefone, String cep) {
         this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
         this.endereco = endereco;
+        this.complemento= complemento;
         this.pais = pais;
         this.estado = estado;
         this.telefone = telefone;
@@ -59,6 +72,7 @@ public class ClienteForm {
                 ", sobrenome='" + sobrenome + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", endereco='" + endereco + '\'' +
+                ", complemento='" + complemento + '\'' +
                 ", pais='" + pais + '\'' +
                 ", estado='" + estado + '\'' +
                 ", telefone='" + telefone + '\'' +
@@ -67,6 +81,6 @@ public class ClienteForm {
     }
 
     public Cliente converter() {
-        return new Cliente(email,nome,sobrenome,cpf,endereco,pais,estado,telefone,cep);
+        return new Cliente(email,nome,sobrenome,cpf,endereco,complemento,pais,estado,telefone,cep);
     }
 }

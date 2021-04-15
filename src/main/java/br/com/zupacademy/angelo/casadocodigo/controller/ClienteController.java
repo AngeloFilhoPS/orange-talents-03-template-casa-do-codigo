@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/clientes")
@@ -26,6 +27,7 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<?> cadastrarCliente(@RequestBody @Valid ClienteForm form){
         Cliente cliente = form.converter();
+
         cliente = clienteRepository.save(cliente);
         return ResponseEntity.ok().body(cliente);
     }
