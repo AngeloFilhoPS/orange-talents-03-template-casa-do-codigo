@@ -16,9 +16,9 @@ import javax.validation.Valid;
 @RequestMapping("/paises")
 public class PaisController {
 
-    @Autowired
     private PaisRepository paisRepository;
 
+    public PaisController(){}
 
     public PaisController(PaisRepository paisRepository) {
         this.paisRepository = paisRepository;

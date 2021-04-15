@@ -33,11 +33,15 @@ public class Cliente {
     @NotNull
     private String complemento;
 
-    @NotNull
-    private String pais;
 
+    @JoinColumn
+    @ManyToOne
     @NotNull
-    private String estado;
+    private Pais pais;
+
+    @JoinColumn
+    @ManyToOne
+    private Estado estado;
 
     @NotNull
     private String telefone;
@@ -47,7 +51,7 @@ public class Cliente {
 
     public Cliente(){}
 
-    public Cliente(String email, String nome, String sobrenome, String cpfOrCnpj, String endereco,String complemento, String pais, String estado, String telefone, String cep) {
+    public Cliente(String email, String nome, String sobrenome, String cpfOrCnpj, String endereco,String complemento, Pais pais, Estado estado, String telefone, String cep) {
         this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -80,11 +84,11 @@ public class Cliente {
         return endereco;
     }
 
-    public String getPais() {
+    public Pais getPais() {
         return pais;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 

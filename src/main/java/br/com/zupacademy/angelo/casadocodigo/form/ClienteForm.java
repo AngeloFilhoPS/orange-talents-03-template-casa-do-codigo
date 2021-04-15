@@ -6,9 +6,9 @@ import br.com.zupacademy.angelo.casadocodigo.compartilhado.UniqueValue;
 import br.com.zupacademy.angelo.casadocodigo.entity.Cliente;
 import br.com.zupacademy.angelo.casadocodigo.entity.Estado;
 import br.com.zupacademy.angelo.casadocodigo.entity.Pais;
-import org.hibernate.validator.constraints.br.CPF;
+import br.com.zupacademy.angelo.casadocodigo.repository.EstadoRepository;
+import br.com.zupacademy.angelo.casadocodigo.repository.PaisRepository;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -28,8 +28,8 @@ public class ClienteForm {
 
     @CpfOrCnpj
     @NotBlank
-    @UniqueValue(domainClass = Cliente.class,fieldName = "cpf")
-    private String cpf;
+    @UniqueValue(domainClass = Cliente.class,fieldName = "cpfOrCnpj")
+    private String cpfOrCnpj;
 
     @NotBlank
     private String endereco;
@@ -37,13 +37,10 @@ public class ClienteForm {
     @NotBlank
     private String complemento;
 
-    @NotBlank
-    @ExistValue(entity = Pais.class,campo = "nome")
-    private String pais;
+    @NotNull
+    private Long paisId;
 
-    @NotBlank
-    @ExistValue(entity = Estado.class,campo = "nome")
-    private String estado;
+    private Long estadoId;
 
     @NotBlank
     private String telefone;
@@ -51,15 +48,15 @@ public class ClienteForm {
     @NotBlank
     private String cep;
 
-    public ClienteForm(String email, String nome, String sobrenome, String cpf, String endereco, String complemento, String pais, String estado, String telefone, String cep) {
+    public ClienteForm(String email, String nome, String sobrenome, String cpfOrCnpj, String endereco, String complemento, Long paisId, Long estadoId, String telefone, String cep) {
         this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.cpf = cpf;
+        this.cpfOrCnpj = cpfOrCnpj;
         this.endereco = endereco;
         this.complemento= complemento;
-        this.pais = pais;
-        this.estado = estado;
+        this.paisId = paisId;
+        this.estadoId = estadoId;
         this.telefone = telefone;
         this.cep = cep;
     }
@@ -70,17 +67,24 @@ public class ClienteForm {
                 "email='" + email + '\'' +
                 ", nome='" + nome + '\'' +
                 ", sobrenome='" + sobrenome + '\'' +
-                ", cpf='" + cpf + '\'' +
+                ", cpfOrCnpj='" + cpfOrCnpj + '\'' +
                 ", endereco='" + endereco + '\'' +
                 ", complemento='" + complemento + '\'' +
-                ", pais='" + pais + '\'' +
-                ", estado='" + estado + '\'' +
+                ", pais='" + paisId + '\'' +
+                ", estado='" + estadoId + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", cep='" + cep + '\'' +
                 '}';
     }
 
-    public Cliente converter() {
-        return new Cliente(email,nome,sobrenome,cpf,endereco,complemento,pais,estado,telefone,cep);
+    public Cliente converter(PaisRepository paisRepository, EstadoRepository estadoRepository) {
+        Pais pais = paisRepository.findPaisById(paisId);
+        Estado estado = null;
+
+        if(estadoId!=null){
+            estado=estadoRepository.findEstadoById(estadoId);
+        }
+
+        return new Cliente(email,nome,sobrenome,cpfOrCnpj,endereco,complemento, pais, estado,telefone,cep);
     }
 }

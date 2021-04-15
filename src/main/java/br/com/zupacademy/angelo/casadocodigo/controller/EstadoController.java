@@ -18,9 +18,10 @@ import javax.validation.Valid;
 @RequestMapping("/estados")
 public class EstadoController {
 
-    @Autowired
     private PaisRepository paisRepository;
     private EstadoRepository estadoRepository;
+
+    public EstadoController(){}
 
     public EstadoController(EstadoRepository estadoRepository, PaisRepository paisRepository){
        this.estadoRepository= estadoRepository;

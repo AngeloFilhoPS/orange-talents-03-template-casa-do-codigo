@@ -13,6 +13,6 @@ public @interface ExistValue {
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
     Class<?> entity();
-    String campo() default "";
+    String campo() default "    ";
 
 }
